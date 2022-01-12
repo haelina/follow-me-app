@@ -67,6 +67,9 @@ password: testi123
 - Profile image
   - Profile image can not be deleted
   - Profile image disappears only if the current profile image is deleted from the gallery
+- Users with same username when registering new account
+  - Multiple users with same username can be created in the app
+  - The app should check if there is already a user with that username and prevent the user creation so that the app contains only users with unique usernames
 - Visual flaws
   - All the buttons and elements are currently not styled with bootstrap classes
   - The page is designed for desktop and it doesn't work well in mobile view
