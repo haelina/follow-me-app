@@ -18,20 +18,20 @@ public class DevelopmentSecurityConfiguration extends WebSecurityConfigurerAdapt
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
-    
+
     /*
     @Override
     public void configure(WebSecurity sec) throws Exception {
         // Pyyntöjä ei tarkasteta
         sec.ignoring().antMatchers("/**");
     }*/
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // mahdollistetaan h2-konsolin käyttö
         // MUISTA KOMMENTOIDA NÄMÄ 2 RIVIÄ POIS, MUUTEN POSTGRESQL EI TOIMI HEROKUSSA!
-        http.csrf().disable();
-        http.headers().frameOptions().sameOrigin();
+        //http.csrf().disable();
+        //http.headers().frameOptions().sameOrigin();
 
         http.authorizeRequests()
                 //.antMatchers("/h2-console", "/h2-console/**").permitAll()
