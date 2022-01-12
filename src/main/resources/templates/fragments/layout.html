@@ -32,7 +32,11 @@
           <p></p>
         </div>
         <div class="col-2">
-          <button th:onclick="|window.location.href='@{/users}'|">
+          <button
+            th:onclick="|window.location.href='@{/users}'|"
+            type="button"
+            class="btn btn-light"
+          >
             Register new user
           </button>
         </div>
