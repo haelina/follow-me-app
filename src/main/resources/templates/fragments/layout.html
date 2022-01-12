@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+    <head th:fragment="head(title)" lang="en">
+        <meta charset="UTF-8" />
+        <title th:text="${title}">Layout</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    </head>
+    <body>
+        <div th:fragment="login" class="container px-3 py-5 bg-dark text-white">
+            <div class="row">
+                <div class="col-2">
+                    <div sec:authorize="!isAuthenticated()">
+                        <a th:text="'Login'" th:href="@{/login}"/>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <p>Logged in as <span sec:authentication="name"></span></p>
+                        <a th:text="'Logout'" th:href="@{/logout}"/>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <p></p>
+                </div>
+                <div class="col-2">
+                    <button th:onclick="|window.location.href='@{/users}'|">Register new user</button>
+                </div>
+            </div>   
+        </div>
+    </body>
+</html>

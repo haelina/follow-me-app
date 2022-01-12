@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/layout :: head(title='Search results')">
+        <meta charset="UTF-8" />
+        <title>Search results</title>
+    </head>
+    <body>
+        <div class="container min-vh-100 border border-primary bg-light">
+            <a th:href="@{/}">Back to front page</a>
+            <div th:replace="fragments/layout :: login"></div>
+            <div class="container my-3 text-center">
+                <div class="row">
+                    <div class="col">
+                        <h1 th:text="${'Search Results'}">Hello world</h1>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4 th:text="${'Users found with keyword ' + keyword}">Users found:</h4>
+                <ul>
+                    <li th:each="user : ${users}">
+                        <a th:href="@{/users/{id}(id=${user.profileName})}">
+                            <span th:text="${user.profileName}">profiilin nimi</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
+

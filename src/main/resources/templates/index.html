@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/layout :: head(title='Front Page')">
+        <meta charset="UTF-8" />
+        <title>Wannabe Twitter</title>
+    </head>
+    <body>
+        <div class="container min-vh-100 pt-4 border border-primary bg-light text-center">
+            <div th:replace="fragments/layout :: login"></div>
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col">
+                        <h1 th:text="${'Welcome, this is front page!'}">Hello world</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <form class="my-4" th:action="@{/users/search}" method="get">
+                    <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find profile with profile name" size="50" />
+                    <button type="submit" class="btn btn-info" >Search</button>
+                    <!--<button type="submit" class="btn btn-info" >Reset</button>-->
+                </form>
+                <h3>All users:</h3>
+                <div class="text-left">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-white my-1 p-2 border" th:each="user : ${users}">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col-2">
+                                        <a th:href="@{/users/{id}(id=${user.profileName})}">
+                                            <span th:text="${user.profileName}">profiilin nimi</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <form th:if="${!(user.userName == currentUserName)}" sec:authorize="isAuthenticated()" 
+                                            th:action="@{/users/{id}/follow(id=${user.profileName})}" 
+                                            method="POST">
+                                            <input type="submit" value="Start following"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

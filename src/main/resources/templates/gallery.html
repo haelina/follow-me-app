@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+    <head th:replace="fragments/layout :: head(title='Image Gallery')">
+        <meta charset="UTF-8" />
+        <title>Image Gallery</title>
+    </head>
+    <body>
+        <div class="container min-vh-100 border border-primary bg-light">
+            <a th:href="@{/}">Back to front page</a>
+            <div th:replace="fragments/layout :: login"></div>
+            <div class="text-center my-3">
+                <h1 th:text="${user.profileName}">Profilename</h1>
+            </div>
+            <div class="text-right pr-5">
+                <button th:onclick="|window.location.href='@{/users/{id}(id=${user.profileName})}'|">Back to My Page</button>
+            </div>
+            <div class="bg-dark text-white my-2 p-3 border border-primary" th:if="${user.userName == currentUserName}">
+                <h3>Add new image:</h3>
+
+                <form method="POST" th:action="@{/users/{id}/images(id=${user.profileName})}" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file"/>
+                    <input type="text" name="description" id="description"/>
+                    <input type="submit" value="Add!"/>
+                </form>
+            </div>
+            <div>
+                <h3>My images:</h3>
+                <div th:each="image : ${images}">
+                    <div class="container border border-dark m-1 p-2">
+                        <div class="row">
+                            <div class="col-6">
+                                <img style="max-width:100%;" th:src="@{/images/{id}/content(id=${image.id})}" alt="${image.description}"/>
+                            </div>
+                            <div class="col-6">
+                                <p th:text="${image.description}">Description</p>
+                                <p th:text="|Liked: ${image.likedBy.size()} times|"> Liked x times </p>
+                                <div th:if="${!(user.userName == currentUserName)}">
+                                    <form sec:authorize="isAuthenticated()" th:action="@{/users/{id}/images/{imageId}/like(id=${user.profileName},imageId=${image.id})}" method="POST">
+                                        <input type="submit" value="Like image"/>
+                                    </form>
+                                </div>
+                                <div th:if="${user.userName == currentUserName}">
+                                    <form th:action="@{/users/{id}/profileimage/{imageId}(id=${user.profileName},imageId=${image.id})}" method="POST">
+                                        <input type="submit" value="Set as profile image"/>
+                                    </form>
+                                    <form th:action="@{/users/{id}/images/{imageId}(id=${user.profileName},imageId=${image.id})}" method="POST">
+                                        <input type="submit" value="Delete this image"/>
+                                    </form>
+                                </div>
+                                <form class="p-2 my-2 border border-dark bg-white" sec:authorize="isAuthenticated()" th:action="@{/users/{profileName}/images/{id}/comments(profileName=${user.profileName},id=${image.id})}" method="POST">
+                                    <table>
+                                        <tr>
+                                            <td>Write new comment: </td>
+                                            <td><input type="text" name="comment" id="comment"/></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><button type="submit">Add Comment</button></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                <ul>
+                                    <li th:each="comment : ${image.comments}">
+                                        <p th:text="|Comment from: ${comment.writer.profileName} 
+                                           ${#temporals.format(comment.published, 'dd.MM.yyyy HH:mm')}|"></p>
+                                        <p th:text="${comment.comment}"></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a th:href="@{/}">Back to front page</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+    <head th:replace="fragments/layout :: head(title='${toptext}')">
+        <meta charset="UTF-8" />
+        <title>Follower page</title>
+    </head>
+    <body>
+        <div class="container min-vh-100 border border-primary bg-light">
+            <a th:href="@{/}">Back to front page</a>
+            <div th:replace="fragments/layout :: login"></div>
+            <div class="text-center my-3">
+                <h1 th:text="${user.profileName}">Profilename</h1>
+            </div>
+            <div class="text-right pr-5">
+                <button th:onclick="|window.location.href='@{/users/{id}/images(id=${user.profileName})}'|">Image Gallery</button>
+            </div>
+            <div>
+                <h3 th:text="${toptext}">My followers:</h3>
+
+                <ul>
+                    <li th:each="follower : ${followers}">
+                        <p th:text="${follower.userName}"></p>
+                    </li>
+                </ul>
+            </div>
+            <a th:href="@{/users/{id}(id=${user.profileName})}">Back to profile</a>
+        </div>
+    </body>
+</html>
