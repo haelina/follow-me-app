@@ -11,7 +11,9 @@ The purpose of the app is to allow user registration and login and then the user
 The application is running in Heroku. [Go and see it yourself!](https://follow-me2.herokuapp.com/)
 
 Test user details for logging in:
+
 username: miraakkeli
+
 password: testi123
 
 ## What it looks like?
