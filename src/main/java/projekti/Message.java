@@ -19,16 +19,16 @@ import javax.persistence.OneToMany;
 public class Message extends AbstractPersistable<Long> {
     @ManyToOne
     private Account account;
-    
+
     //Uncomment this to make it work with h2 database
-    @Column(columnDefinition="TEXT")
+    //@Column(columnDefinition="TEXT")
     private String message;
-    
+
     private LocalDateTime published;
-    
+
     @OneToMany(mappedBy = "message")
     private List<Comment> comments;
-    
+
     @ManyToMany
     private List<Account> likedBy;
 }

@@ -17,13 +17,13 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @AllArgsConstructor
 public class ImageObject extends AbstractPersistable<Long> {
     //Uncomment this to make it work with h2 database
-    @Lob
+    //@Lob
     private byte[] content;
     private String description;
     @ManyToOne
     private Account account;
     @ManyToMany
-    private List<Account> likedBy; 
+    private List<Account> likedBy;
     @OneToMany(mappedBy = "image")
     private List<Comment> comments;
 }

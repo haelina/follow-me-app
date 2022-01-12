@@ -16,15 +16,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Comment extends AbstractPersistable<Long> {
     @ManyToOne
     private ImageObject image;
-    
+
     @ManyToOne
     private Message message;
-    
-    @Column(columnDefinition="TEXT")
+
+    //Uncomment this to make it work with h2 database
+    //@Column(columnDefinition="TEXT")
     private String comment;
-    
+
     @ManyToOne
     private Account writer;
-    
+
     private LocalDateTime published;
 }
