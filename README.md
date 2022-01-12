@@ -4,7 +4,7 @@ A Spring Boot project made for mooc course "Web-palvelinohjelmointi Java 2021" (
 
 The application is a Spring Boot app with Thymeleaf templates and it uses Postgres database for storing user-related data and images.
 
-The purpose of the app is to allow user registration and login and then the user can add images and write posts to his/her own pages. A user can also comment other users' images and posts, or start to follow them.
+The purpose of the app is to allow user registration and login and then the user can add images and write posts to his/her own pages. A user can also comment and like other users' images and posts, or start to follow them.
 
 ## Link to Heroku
 
